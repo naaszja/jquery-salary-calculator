@@ -9,10 +9,10 @@ body {
     background-color: ghostwhite;
     border: solid black 1px;
 }
-
+/* 
 td {
     border: solid black 2px;
-}
+} */
 
 .fNameCell {
     width: 10%;
@@ -33,6 +33,13 @@ td {
     width: 10%;
 }
 
-tr {
-    background-color: greenyellow;
+button {
+    background-color: yellow;
+    color: crimson;
+    border-radius: 5px;
 }
+
+button:hover {
+    background-color: crimson;
+    color: yellow; 
+} 
