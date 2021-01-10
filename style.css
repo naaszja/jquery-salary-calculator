@@ -9,37 +9,14 @@ body {
     background-color: ghostwhite;
     border: solid black 1px;
 }
-/* 
-td {
-    border: solid black 2px;
-} */
-
-.fNameCell {
-    width: 10%;
-}
-.lNameCell {
-    width: 10%;
-}
-.idCell {
-    width: 5%;
-}
-.titleCell {
-    width: 10%;
-}
-.salaryCell {
-    width: 8%;
-}
-.buttonCell {
-    width: 10%;
-}
 
 button {
-    background-color: yellow;
-    color: crimson;
+    background-color: white;
+    color: green;
     border-radius: 5px;
 }
 
 button:hover {
-    background-color: crimson;
-    color: yellow; 
+    background-color: green;
+    color: white; 
 } 
