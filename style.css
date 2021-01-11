@@ -54,3 +54,7 @@ tr {
     width: 90%;
     height: 30px;
 }
+
+th {
+    font-size: 1.5em;
+}

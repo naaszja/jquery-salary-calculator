@@ -29,6 +29,7 @@ function onReady() {
 
         //Zero out payroll to keep it up to day with the current array
         annualPayroll = 0;
+        monthlyPayroll = 0;
 
         // loop employee array and display to the dom
         for (let emp of employees) {
@@ -42,6 +43,7 @@ function onReady() {
             //add each annual salary to the total payroll
             annualPayroll += annualSalary
             monthlyPayroll = (annualPayroll / 12);
+            monthlyPayroll = monthlyPayroll.toFixed(2);
 
             // call our reusable function by passing in the 3
             // values from the cohort object
@@ -51,20 +53,15 @@ function onReady() {
 
     $('#employeeList').on('click', '.dlt-emp-button', function (event) {
 
-        // Capture the target of the click event
-        const clickTarget = $(this).closest("tr");
-        debugger;
-
-        //Use the target of the click to delete the closest ancestor li. This will delete the entire row.
-        clickTarget.remove();
+        //Use the target of the events ancestors to target and remove the row that the data resides in.
+        employees.splice(($(event.target).parent().parent().attr('arraypos')), 1);
 
         //Clear dom to keep display current/
         $('#empTable-body').empty();
 
-        monthlyPayroll = 0;
-
         //Zero out payroll to keep it up to day with the current array
         annualPayroll = 0;
+        monthlyPayroll = 0;
 
         // loop employee array and display to the dom
         for (let emp of employees) {
@@ -78,6 +75,7 @@ function onReady() {
             //add each annual salary to the total payroll
             annualPayroll += annualSalary
             monthlyPayroll = (annualPayroll / 12);
+            monthlyPayroll = monthlyPayroll.toFixed(2);
 
             // call our reusable function by passing in the 3
             // values from the cohort object
@@ -118,8 +116,8 @@ function appendDOM(fName, lName, id, title, salary) {
              <td></td>
              <td></td>
              <td></td>
-            <td><h2>Monthly Payroll: </h2></td>
-            <td>${monthlyPayroll}</td>
+            <td><h3>Monthly Payroll: </h3></td>
+            <td style='font-size: 1.5em;'>$ ${monthlyPayroll}</td>
         </tr>`
     );
 }
