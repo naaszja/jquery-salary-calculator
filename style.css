@@ -1,22 +1,52 @@
 body {
-    background-color: deepskyblue;
     text-align: center;
+    background-color: rgb(182, 182, 231);
 }
 
-.empTable {
+#empTable-body {
     margin: 5%;
     width: 90%;
-    background-color: ghostwhite;
+    background-color: white;
     border: solid black 1px;
 }
 
-button {
-    background-color: white;
-    color: green;
+#add-emp-button {
+    background-color: green;
+    color: white;
     border-radius: 5px;
 }
 
-button:hover {
-    background-color: green;
-    color: white; 
-} 
+#add-emp-button:hover {
+    background-color: white;
+    color: green;
+}
+
+#tableFooter {
+    text-align: right;
+}
+
+.dlt-emp-button {
+    background-color: crimson;
+    color: white;
+    border-radius: 5px;
+}
+
+.dlt-emp-button:hover {
+    background-color: yellow;
+    color: red;
+}
+
+ul {
+    list-style-type: none;
+    margin: 2em auto;
+    display: inline-block;
+}
+
+th, td {
+    width: 15%;
+}
+
+tr {
+    width: 90%;
+    height: 30px;
+}

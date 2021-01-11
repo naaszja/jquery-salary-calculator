@@ -15,14 +15,37 @@
     <main>
 
         <h1>~~~Salary Calculator~~~</h1>
+
+        <!-- Create inputs to collect employee information from user -->
         <input id='empFirstName' type="text" placeholder="First Name" />
         <input id='empLastName' type="text" placeholder="Last Name" />
-        <input id='empID' type="text" placeholder='Employee ID#'>
-        <input id='empTitle' type="text" placeholder="Job Title">
-        <input id='empSalary' type="text" placeholder="Annual Salary">
-        <td class='add-emp-button'><button><strong><em>Add Employee</em></strong></button>
+        <input id='empID' type="text" placeholder='Employee ID#' />
+        <input id='empTitle' type="text" placeholder="Job Title" />
+        <input id='empSalary' type="text" placeholder="Annual Salary" />
+
+        <!-- Button to capture user input and then add the employee to the array -->
+        <button id='add-emp-button'><strong><em>Add Employee</em></strong></button>
+
+        <ul id='employeeList'>
+            <li>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Employee ID</th>
+                            <th>Job Title</th>
+                            <th>Annual Salary</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id='empTable-body'>
+                    </tbody>
+                    <tfoot id='tableFooter'>
+                    </tfoot>
+                </table>
+            </li>
+        </ul>
 
     </main>
 </body>
-
-</html>
