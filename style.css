@@ -36,6 +36,10 @@ body {
     color: red;
 }
 
+.monthly-too-high {
+    background-color: red;
+}
+
 ul {
     list-style-type: none;
     margin: 2em auto;
