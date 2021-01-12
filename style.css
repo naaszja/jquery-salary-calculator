@@ -3,47 +3,6 @@ body {
     background-color: rgb(160, 212, 255);
 }
 
-#empTable-body {
-    margin: 5%;
-    width: 90%;
-    background-color: white;
-    border: solid black 1px;
-}
-
-#add-emp-button {
-    background-color: green;
-    color: white;
-    border-radius: 5px;
-}
-
-#add-emp-button:hover {
-    background-color: white;
-    color: green;
-}
-
-#tableFooter {
-    text-align: right;
-}
-
-.dlt-emp-button {
-    background-color: crimson;
-    color: white;
-    border-radius: 5px;
-}
-
-.dlt-emp-button:hover {
-    background-color: yellow;
-    color: red;
-}
-
-.monthly-too-high {
-    background-color: red;
-}
-
-.empInput {
-margin-bottom: 2em;
-}
-
 h1 {
     font-size: 2.5em;
     padding: 3%;
@@ -69,6 +28,56 @@ th {
     font-size: 1.5em;
 }
 
-#monthOut {
-    background-color: chartreuse;
+footer {
+    text-align: right;
+}
+
+#h1Head {
+    padding-bottom: 3%;
+}
+
+#empTable {
+    display: inline-block;
+    margin: auto;
+}
+
+#empTable-body {
+    margin: 5%;
+    width: 90%;
+    background-color: white;
+    border: solid black 1px;
+}
+
+#add-emp-button {
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+}
+
+#add-emp-button:hover {
+    background-color: white;
+    color: green;
+}
+
+#totalMonth {
+    color: chartreuse;
+}
+
+.dlt-emp-button {
+    background-color: crimson;
+    color: white;
+    border-radius: 5px;
+}
+
+.dlt-emp-button:hover {
+    background-color: yellow;
+    color: red;
+}
+
+.monthly-too-high {
+    background-color: red;
+}
+
+.empInput {
+    margin-bottom: 2em;
 }

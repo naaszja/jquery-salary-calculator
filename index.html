@@ -10,7 +10,7 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
     <!-- Source in our JavaScript file -->
-    <script src="client.js"></script>
+    <!-- <script src="client.js"></script> -->
 
     <!-- Source in our CSS file -->
     <link rel="stylesheet" href="style.css">
@@ -20,12 +20,13 @@
 
 <body>
     <header>
-        <h1>Monthly Payroll Calculator</h1>
+        <h1 id='h1Head'>Monthly Payroll Calculator</h1>
     </header>
 
     <main>
         <!-- Create inputs to collect employee information from user -->
-        <h3>Please enter employee information in the fields below:</h3>
+        <h3>Please enter employee information in the fields below<br><em>(Incomplete forms will not be accepted.) </em>
+        </h3>
 
         <div class='empInput'>
             <input id='empFirstName' type="text" placeholder="First Name" />
@@ -37,25 +38,27 @@
             <!-- Button to capture user input and then add the employee to the 'employees' array -->
             <button id='add-emp-button'><strong><em>Add Employee</em></strong></button>
         </div>
-        
-            <table id='employeeList'>
-                <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Employee ID</th>
-                        <th>Job Title</th>
-                        <th>Annual Salary</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                </tbody>
-            </table>
+        <table id='empTable'>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Employee ID</th>
+                    <th>Job Title</th>
+                    <th>Annual Salary</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="10">No employee information to display at this time.</td>
+                </tr>
+            </tbody>
+        </table>
 
-            <footer>
-                <h3>`Monthly Payroll: ${monthlyPayroll}`</h3>
-            </footer>
+        <footer>
+            <h3>Monthly Payroll: <span id='totalMonth'>$0.00</span></h3>
+        </footer>
     </main>
 </body>

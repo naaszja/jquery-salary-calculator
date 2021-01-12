@@ -16,6 +16,9 @@ console.log('JS linked');
    11. [ ] STRETCH: Delete also updates the monthly salary amount
 */
 
+//Global array to hold the 'employee' objects
+const employees = [];
+
 //Declare variable to hold total annual payroll
 let annualAnnualPayroll = 0;
 
@@ -63,13 +66,21 @@ function onReady() {
 function newEmployee() {
     const firstName = $('#empFirstName').val();
     const lastName = $('#empLastName').val();
-    const idNumber = Number($('#empID').val());
+    const idNumber = $('#empID').val();
     const jobTitle = $('#empTitle').val();
-    const annualSalary = Number($('#empSalary').val());
+    const annualSalary = $('#empSalary').val();
 
 
     //Create an employee object from the user input then push the employee to the employees array
-    addEmployee(firstName, lastName, idNumber, jobTitle, annualSalary);
+    function addEmployee(firstName, lastName, idNumber, jobTitle, annualSalary) {
+        employees.push({
+            firstName: firstName,
+            lastName: lastName,
+            idNumber: idNumber,
+            jobTitle: jobTitle,
+            annualSalary: annualSalary
+        })
+    }
 
     //Clear dom to keep display current/
     $('#empTable-body').empty();
@@ -98,18 +109,6 @@ function newEmployee() {
     }
 };
 
-// Function to take input from the user and create a new employee object in the 'employees' array
-function addEmployee(fName, lName, id, title, salary) {
-
-    employees.push({
-        firstName: fName,
-        lastName: lName,
-        idNumber: id,
-        jobTitle: title,
-        annualSalary: salary
-    })
-}
-
 function appendDOM(fName, lName, id, title, salary) {
 
     $('#empTable-body').append(
@@ -125,8 +124,8 @@ function appendDOM(fName, lName, id, title, salary) {
 
     $('#tableFooter').empty()
 
-    if (monthlyPayroll > 20000){
-    $('#monthOut').addClass('monthly-too-high');
+    if (monthlyPayroll > 20000) {
+        $('#monthOut').addClass('monthly-too-high');
     } else if (monthlyPayroll < 20000) {
         $('#monthOut').removeClass('monthly-too-high');
     }
