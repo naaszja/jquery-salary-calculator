@@ -1,26 +1,27 @@
 console.log('JS linked');
 
 
-//I really like Blaine's checklists that he makes....so I borrowed this one. All credit to Blaine.
+//I really like Blaine's checklists that he makes....so I borrowed this one. All credit
 /*
-   1. [ ] Create the html structure
-   2. [ ] Capture the input when the user clicks the button
-   3. [ ] Create a new employee object (for practice) when the data is captured
-   4. [ ] Add that employee to the DOM, and to the global array (for later use)
-   5. [ ] Add the salary to the global running total
-   6. [ ] Calculate the monthly salary
-   7. [ ] Update the DOM with the new monthly salary
+   1. [x] Create the html structure
+   2. [x] Capture the input when the user clicks the button
+   3. [x] Create a new employee object (for practice) when the data is captured
+   4. [x] Add that employee to the DOM, and to the global array (for later use)
+   5. [x] Add the salary to the global running total
+   6. [x] Calculate the monthly salary
+   7. [x] Update the DOM with the new monthly salary
    8. [ ] If the Salary > $20k, make the text red
-   9. [ ] Add a delete button to the employee row
-   10. [ ] Delete button removes the row from the DOM
+   9. [x] Add a delete button to the employee row
+   10. [x] Delete button removes the row from the DOM
    11. [ ] STRETCH: Delete also updates the monthly salary amount
 */
 
-//Global array to hold the 'employee' objects
+//Create array to hold employee objects
 const employees = [];
 
-//Declare variable to hold total annual payroll
-let annualAnnualPayroll = 0;
+//Declare variable to hold total payroll
+let annualPayroll = 0;
+let monthlyPayroll = 0;
 
 $(onReady)
 
@@ -28,12 +29,59 @@ function onReady() {
     console.log('JQ linked');
 
     //Cick handler for add-emp-button
-    $('#add-emp-button').on('click', newEmployee);
+    $('#add-emp-button').on('click', function () {
+        const firstName = $('#empFirstName').val();
+        const lastName = $('#empLastName').val();
+        const idNumber = Number($('#empID').val());
+        const jobTitle = $('#empTitle').val();
+        const annualSalary = Number($('#empSalary').val());
+
+
+        //Create an employee object from the user input then push the employee to the employees array
+        addEmployee(firstName, lastName, idNumber, jobTitle, annualSalary);
+
+        //Clear form values
+        $('#empFirstName').val('');
+        $('#empLastName').val('');
+        $('#empID').val('');
+        $('#empTitle').val('');
+        $('#empSalary').val('');
+        
+        console.log('Employees currently in the array:\n');
+        for (let emp of employees) {
+            console.log(emp);
+        }
+        //Clear dom to keep display current/
+        $('#empTable-body').empty();
+
+        //Zero out payroll to keep it up to day with the current array
+        annualPayroll = 0;
+        monthlyPayroll = 0;
+
+        // loop employee array and display to the dom
+        for (let emp of employees) {
+            // Get the employee information
+            let firstName = emp.firstName;
+            let lastName = emp.lastName;
+            let idNumber = emp.idNumber;
+            let jobTitle = emp.jobTitle;
+            let annualSalary = emp.annualSalary;
+
+            //add each annual salary to the total payroll
+            annualPayroll += annualSalary
+            monthlyPayroll = (annualPayroll / 12);
+            monthlyPayroll = monthlyPayroll.toFixed(2);
+
+            // call our reusable function by passing in the 3
+            // values from the cohort object
+            appendDOM(firstName, lastName, idNumber, jobTitle, annualSalary);
+        }
+    });
 
     $('#employeeList').on('click', '.dlt-emp-button', function (event) {
 
         //Use the target of the events ancestors to target and remove the row that the data resides in.
-        employees.splice(($(event.target).parent().parent().attr('arrayposd')), 1);
+        employees.splice(($(event.target).parent().parent().attr('arraypos')), 1);
 
         //Clear dom to keep display current/
         $('#empTable-body').empty();
@@ -63,51 +111,17 @@ function onReady() {
     })
 }
 
-function newEmployee() {
-    const firstName = $('#empFirstName').val();
-    const lastName = $('#empLastName').val();
-    const idNumber = $('#empID').val();
-    const jobTitle = $('#empTitle').val();
-    const annualSalary = $('#empSalary').val();
+// Function to take input from the user and create a new employee object in the 'employees' array
+function addEmployee(fName, lName, id, title, salary) {
 
-
-    //Create an employee object from the user input then push the employee to the employees array
-    function addEmployee(firstName, lastName, idNumber, jobTitle, annualSalary) {
-        employees.push({
-            firstName: firstName,
-            lastName: lastName,
-            idNumber: idNumber,
-            jobTitle: jobTitle,
-            annualSalary: annualSalary
-        })
-    }
-
-    //Clear dom to keep display current/
-    $('#empTable-body').empty();
-
-    //Zero out payroll to keep it up to day with the current array
-    annualPayroll = 0;
-    monthlyPayroll = 0;
-
-    // loop employee array and display to the dom
-    for (let emp of employees) {
-        // Get the employee information
-        let firstName = emp.firstName;
-        let lastName = emp.lastName;
-        let idNumber = emp.idNumber;
-        let jobTitle = emp.jobTitle;
-        let annualSalary = emp.annualSalary;
-
-        //add each annual salary to the total payroll
-        annualPayroll += annualSalary
-        monthlyPayroll = (annualPayroll / 12);
-        monthlyPayroll = monthlyPayroll.toFixed(2);
-
-        // call our reusable function by passing in the 3
-        // values from the cohort object
-        appendDOM(firstName, lastName, idNumber, jobTitle, annualSalary);
-    }
-};
+    employees.push({
+        firstName: fName,
+        lastName: lName,
+        idNumber: id,
+        jobTitle: title,
+        annualSalary: salary
+    })
+}
 
 function appendDOM(fName, lName, id, title, salary) {
 
