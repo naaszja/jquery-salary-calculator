@@ -1,6 +1,6 @@
 body {
     text-align: center;
-    background-color: rgb(182, 182, 231);
+    background-color: rgb(160, 212, 255);
 }
 
 #empTable-body {
@@ -40,6 +40,16 @@ body {
     background-color: red;
 }
 
+.empInput {
+margin-bottom: 2em;
+}
+
+h1 {
+    font-size: 2.5em;
+    padding: 3%;
+    padding-bottom: 0;
+}
+
 ul {
     list-style-type: none;
     margin: 2em auto;
@@ -57,4 +67,8 @@ tr {
 
 th {
     font-size: 1.5em;
+}
+
+#monthOut {
+    background-color: chartreuse;
 }

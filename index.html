@@ -19,51 +19,43 @@
 </head>
 
 <body>
+    <header>
+        <h1>Monthly Payroll Calculator</h1>
+    </header>
+
     <main>
-
-        <h1>~~~Salary Calculator~~~</h1>
-
         <!-- Create inputs to collect employee information from user -->
-        <input id='empFirstName' type="text" placeholder="First Name" />
-        <input id='empLastName' type="text" placeholder="Last Name" />
-        <input id='empID' type="text" placeholder='Employee ID#' />
-        <input id='empTitle' type="text" placeholder="Job Title" />
-        <input id='empSalary' type="text" placeholder="Annual Salary" />
+        <h3>Please enter employee information in the fields below:</h3>
 
-        <!-- Button to capture user input and then add the employee to the 'employees' array -->
-        <button id='add-emp-button'><strong><em>Add Employee</em></strong></button>
+        <div class='empInput'>
+            <input id='empFirstName' type="text" placeholder="First Name" />
+            <input id='empLastName' type="text" placeholder="Last Name" />
+            <input id='empID' type="number" placeholder='Employee ID#' />
+            <input id='empTitle' type="text" placeholder="Job Title" />
+            <input id='empSalary' type="number" placeholder="Annual Salary" />
 
-        <ul id='employeeList'>
-            <li>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Employee ID</th>
-                            <th>Job Title</th>
-                            <th>Annual Salary</th>
-                            <th></th>
-                        </tr>
-                    </thead>
+            <!-- Button to capture user input and then add the employee to the 'employees' array -->
+            <button id='add-emp-button'><strong><em>Add Employee</em></strong></button>
+        </div>
+        
+            <table id='employeeList'>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Employee ID</th>
+                        <th>Job Title</th>
+                        <th>Annual Salary</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                    <tbody id='empTable-body'>
-                    </tbody>
+                </tbody>
+            </table>
 
-                    <tfoot id='tableFooter'>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <h3>Monthly Payroll: </h3>
-                            </td>
-                            <td id='monthPay' style='font-size: 1.25em;'>MONTHLY_PAYROLL</td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </li>
-        </ul>
-
+            <footer>
+                <h3>`Monthly Payroll: ${monthlyPayroll}`</h3>
+            </footer>
     </main>
 </body>
