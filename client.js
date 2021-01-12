@@ -3,17 +3,17 @@ console.log('JS linked');
 
 //I really like Blaine's checklists that he makes....so I borrowed this one. All credit
 /*
-   1. [x] Create the html structure
-   2. [x] Capture the input when the user clicks the button
-   3. [x] Create a new employee object (for practice) when the data is captured
-   4. [x] Add that employee to the DOM, and to the global array (for later use)
-   5. [x] Add the salary to the global running total
-   6. [x] Calculate the monthly salary
-   7. [x] Update the DOM with the new monthly salary
-   8. [ ] If the Salary > $20k, make the text red
-   9. [x] Add a delete button to the employee row
-   10. [x] Delete button removes the row from the DOM
-   11. [ ] STRETCH: Delete also updates the monthly salary amount
+   1. [√] Create the html structure
+   2. [√] Capture the input when the user clicks the button
+   3. [√] Create a new employee object (for practice) when the data is captured
+   4. [√] Add that employee to the DOM, and to the global array (for later use)
+   5. [√] Add the salary to the global running total
+   6. [√] Calculate the monthly salary
+   7. [√] Update the DOM with the new monthly salary
+   8. [] If the Salary > $20k, make the text red
+   9. [√] Add a delete button to the employee row
+   10. [√] Delete button removes the row from the DOM
+   11. [√] STRETCH: Delete also updates the monthly salary amount
 */
 
 //Create array to hold employee objects
@@ -46,17 +46,15 @@ function onReady() {
         $('#empID').val('');
         $('#empTitle').val('');
         $('#empSalary').val('');
-        
-        console.log('Employees currently in the array:\n');
-        for (let emp of employees) {
-            console.log(emp);
-        }
+
         //Clear dom to keep display current/
         $('#empTable-body').empty();
 
         //Zero out payroll to keep it up to day with the current array
         annualPayroll = 0;
         monthlyPayroll = 0;
+
+        $('#empTable tbody').empty();   
 
         // loop employee array and display to the dom
         for (let emp of employees) {
@@ -71,6 +69,14 @@ function onReady() {
             annualPayroll += annualSalary
             monthlyPayroll = (annualPayroll / 12);
             monthlyPayroll = monthlyPayroll.toFixed(2);
+            
+            // if (monthlyPayroll >= 20000) {
+            //     $('#totalMonth').removeClass('.totalMonth-under20');
+            //     $('#totalMonth').addClass('.totalMonth-over20');
+            // }else if(monthlyPayroll < 20000) {
+            //     // ('#totalMonth').removeClass('.totalMonth-over20');
+            //     ('#totalMonth').addClass('.totalMonth-under20');
+            // }
 
             // call our reusable function by passing in the 3
             // values from the cohort object
@@ -78,15 +84,20 @@ function onReady() {
         }
     });
 
-    $('#employeeList').on('click', '.dlt-emp-button', function (event) {
+    $('#empTable').on('click', '.dlt-emp-button', function (event) {
 
-        //Use the target of the events ancestors to target and remove the row that the data resides in.
-        employees.splice(($(event.target).parent().parent().attr('arraypos')), 1);
+        //Get the id from the row clicked on so the employee can be removed from the array
+        let id = Number($(event.target).parent().prev().prev().val());
+        console.log(id);
+
+
+        //Target the nearest ancestor 'tr' to delete after the click event
+        $(event.target).closest('tr').remove();
 
         //Clear dom to keep display current/
-        $('#empTable-body').empty();
+        $('#empTable tbody').empty();
 
-        //Zero out payroll to keep it up to day with the current array
+        // //Zero out payroll to keep it up to day with the current array
         annualPayroll = 0;
         monthlyPayroll = 0;
 
@@ -104,8 +115,7 @@ function onReady() {
             monthlyPayroll = (annualPayroll / 12);
             monthlyPayroll = monthlyPayroll.toFixed(2);
 
-            // call our reusable function by passing in the 3
-            // values from the cohort object
+            // call our reusable function by passing in values from the emplyee object(s)
             appendDOM(firstName, lastName, idNumber, jobTitle, annualSalary);
         }
     })
@@ -125,7 +135,8 @@ function addEmployee(fName, lName, id, title, salary) {
 
 function appendDOM(fName, lName, id, title, salary) {
 
-    $('#empTable-body').append(
+    //Add the new employee to the DOM
+    $('#empTable tbody').append(
         `<tr>
             <td>${fName}</td>
             <td>${lName}</td>
@@ -136,21 +147,6 @@ function appendDOM(fName, lName, id, title, salary) {
         </tr>`
     );
 
-    $('#tableFooter').empty()
-
-    if (monthlyPayroll > 20000) {
-        $('#monthOut').addClass('monthly-too-high');
-    } else if (monthlyPayroll < 20000) {
-        $('#monthOut').removeClass('monthly-too-high');
-    }
-
-    $('#tableFooter').append(
-        `<tr>
-             <td></td>
-             <td></td>
-             <td></td>
-            <td colSpan='5'><h3>Monthly Payroll: </h3></td>
-            <td id='monthOut'>$ ${monthlyPayroll}</td>
-        </tr>`
-    );
+    //Update the monthly salary total and append the DOM
+    $('#totalMonth').empty().append(`$${monthlyPayroll}`)
 }

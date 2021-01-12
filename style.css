@@ -59,8 +59,12 @@ footer {
     color: green;
 }
 
-#totalMonth {
+.totalMonth-under20 {
     color: chartreuse;
+}
+
+.totalMonth-over20 {
+    color: crimson;
 }
 
 .dlt-emp-button {
@@ -72,10 +76,6 @@ footer {
 .dlt-emp-button:hover {
     background-color: yellow;
     color: red;
-}
-
-.monthly-too-high {
-    background-color: red;
 }
 
 .empInput {
