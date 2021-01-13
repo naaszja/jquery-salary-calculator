@@ -31,16 +31,16 @@ function onReady() {
     //Cick handler for add-emp-button
     $('#add-emp-button').on('click', function () {
 
-        const firstName = $('#empFirstName').val();
-        const lastName = $('#empLastName').val();
-        const idNumber = Number($('#empID').val());
-        const jobTitle = $('#empTitle').val();
-        const annualSalary = Number($('#empSalary').val());
+        let firstName = $('#empFirstName').val();
+        let lastName = $('#empLastName').val();
+        let idNumber = Number($('#empID').val());
+        let jobTitle = $('#empTitle').val();
+        let annualSalary = Number($('#empSalary').val());
 
         if (!firstName || !lastName || !idNumber || !jobTitle || !annualSalary) {
             alert('All fields required!');
         } else {
-            
+
             //Create an employee object from the user input then push the employee to the employees array
             addEmployee(firstName, lastName, idNumber, jobTitle, annualSalary);
 
@@ -60,32 +60,35 @@ function onReady() {
             // loop employee array and display to the dom
             for (let emp of employees) {
                 // Get the employee information
-                let firstName = emp.firstName;
-                let lastName = emp.lastName;
-                let idNumber = emp.idNumber;
-                let jobTitle = emp.jobTitle;
-                let annualSalary = emp.annualSalary;
+                firstName = emp.firstName;
+                lastName = emp.lastName;
+                idNumber = emp.idNumber;
+                jobTitle = emp.jobTitle;
+                annualSalary = emp.annualSalary;
 
                 //add each annual salary to the total payroll
                 annualPayroll += annualSalary
                 monthlyPayroll = (annualPayroll / 12);
                 monthlyPayroll = monthlyPayroll.toFixed(2);
 
-                // if (monthlyPayroll >= 20000) {
-                //     $('#totalMonth').removeClass('.totalMonth-under20');
-                //     $('#totalMonth').addClass('.totalMonth-over20');
-                // }else if(monthlyPayroll < 20000) {
-                //     // ('#totalMonth').removeClass('.totalMonth-over20');
-                //     ('#totalMonth').addClass('.totalMonth-under20');
-                // }
-
                 // call our reusable function by passing in the 3
                 // values from the cohort object
                 appendDOM(firstName, lastName, idNumber, jobTitle, annualSalary);
             }
+
+            // //Check the 'monthlyPayroll', if it is above 20k change the color from green to red. Change back to green if it falls below 20k
+            // if (monthlyPayroll > 20000) {
+            //     $('#totalMonth').removeClass('totalMonth-under20');
+            //     $('#totalMonth').addClass('totalMonth-over20');
+            // } else if (monthlyPayroll <= 20000) {
+            //     $('#totalMonth').addClass('totalMonth-under20');
+            //     $('#totalMonth').removeClass('totalMonth-over20');
+            // }
+
         }
     });
 
+    //Click handler for the dlt-emp-button
     $('#empTable').on('click', '.dlt-emp-button', function (event) {
 
         // //Get the id from the row clicked on so the employee can be removed from the array
@@ -102,8 +105,6 @@ function onReady() {
             }
         }
 
-        debugger;
-
         //Clear dom to keep display current
         $('#empTable tbody').empty();
 
@@ -111,23 +112,39 @@ function onReady() {
         annualPayroll = 0;
         monthlyPayroll = 0;
 
+        let firstName = '';
+        let lastName = '';
+        let idNumber = 0;
+        let jobTitle = '';
+        let annualSalary = 0;
+
         //Loop employee array and display to the dom
         for (let emp of employees) {
             // Get the employee information
-            let firstName = emp.firstName;
-            let lastName = emp.lastName;
-            let idNumber = emp.idNumber;
-            let jobTitle = emp.jobTitle;
-            let annualSalary = emp.annualSalary;
+            firstName = emp.firstName;
+            lastName = emp.lastName;
+            idNumber = emp.idNumber;
+            jobTitle = emp.jobTitle;
+            annualSalary = emp.annualSalary;
 
             //Add each annual salary to the total payroll
             annualPayroll += annualSalary
             monthlyPayroll = (annualPayroll / 12);
             monthlyPayroll = monthlyPayroll.toFixed(2);
+
+            //Call our reusable function by passing in values from the emplyee object(s)
+            appendDOM(firstName, lastName, idNumber, jobTitle, annualSalary);
         }
 
-        //Call our reusable function by passing in values from the emplyee object(s)
-        appendDOM(firstName, lastName, idNumber, jobTitle, annualSalary);
+        // //Check the 'monthlyPayroll', if it is above 20k change the color from green to red. Change back to green if it falls below 20k
+        // if (monthlyPayroll > 20000) {
+        //     $('#totalMonth').removeClass('totalMonth-under20');
+        //     $('#totalMonth').addClass('totalMonth-over20');
+        // } else if (monthlyPayroll <= 20000) {
+        //     $('#totalMonth').addClass('totalMonth-under20');
+        //     $('#totalMonth').removeClass('totalMonth-over20');
+        // }
+
     })
 }
 
@@ -145,6 +162,16 @@ function addEmployee(fName, lName, id, title, salary) {
 
 function appendDOM(fName, lName, id, title, salary) {
 
+
+    //Check the 'monthlyPayroll', if it is above 20k change the color from green to red. Change back to green if it falls below 20k
+    if (monthlyPayroll > 20000) {
+        $('#totalMonth').removeClass('totalMonth-under20');
+        $('#totalMonth').addClass('totalMonth-over20');
+    } else if (monthlyPayroll <= 20000) {
+        $('#totalMonth').addClass('totalMonth-under20');
+        $('#totalMonth').removeClass('totalMonth-over20');
+    }
+
     //Add the new employee to the DOM
     $('#empTable tbody').append(
         `<tr>
@@ -156,7 +183,6 @@ function appendDOM(fName, lName, id, title, salary) {
             <td class='dlt-emp-button' data-id='${id}' width='15%'>Delete Employee</td>
         </tr>`
     );
-
     //Update the monthly salary total and append the DOM
     $('#totalMonth').empty().append(`$${monthlyPayroll}`)
-}
+}      
